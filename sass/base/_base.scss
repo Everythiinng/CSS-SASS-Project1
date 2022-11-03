@@ -1,0 +1,40 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; /*This is a global clean to the whole page */
+}
+
+html {
+  //This  62.5% defines what 1rem is = 10px = 1rem
+  font-size: 62.5%;
+
+  @include respond(tab-land) {
+    // width < 1200?
+    font-size: 56.25%; // 1 rem = 9px, 9/16 = 56.25%;
+  }
+  @include respond(tab-port) {
+    // width < 900?
+    font-size: 50%; // 1 rem = 8px, 8/16 = 50%;
+  } //The media querys IF applies the last logic, for ex: 700px device, both tabland and tabport will apply but the last one will stay which is 50%
+  @include respond(big-desktop) {
+    // width > 1200
+    font-size: 75%; // 1rem = 12, 12/16
+  }
+}
+
+body {
+  box-sizing: border-box;
+  padding: 3rem; /* This goes to the whole webpage on top and left/right */
+
+  @include respond(tab-port) {
+    padding: 0 !important;
+  }
+
+  // This is when you select text to apply your custom design :D
+  ::selection {
+    background-color: $color-primary;
+    color: $color-white;
+  }
+}

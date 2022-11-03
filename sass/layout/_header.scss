@@ -1,0 +1,56 @@
+.header {
+  height: 85vh;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.823),
+      rgba($color-primary-dark, 0.823)
+    ),
+    url(../img/hero-small.jpg); /* Who is first is on top of everything, Here its the URL. */
+  background-size: cover;
+  background-position: top; /* This holds the background position when the browser changes its size. */
+
+  position: relative;
+  @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon()) {
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%); //other browser support
+    height: 95vh;
+  }
+
+  // Whenever the resolution is 192 AND min width it will load the heavier img or ',' this minwidth 125em/2000px ( 2000/16 = 125)
+  @media only screen and(min-resolution: 192dpi) and (min-width: 37.5em),
+    only screen and(-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
+    only screen and(min-width: 125em) {
+    background-image: linear-gradient(
+        to right bottom,
+        rgba($color-primary-light, 0.823),
+        rgba($color-primary-dark, 0.823)
+      ),
+      url(../../img/hero.jpg);
+  }
+
+  // -webkit-min-device-pixel-ratio: 2 this is for safari support, if the broswer is 2pixel in 1 then its true!
+  // Cuz the min-resolution doesnt work on safari
+
+  @include respond(phone) {
+    clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+  }
+
+  &__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+  }
+
+  &__logo {
+    height: 3.5rem;
+  }
+
+  &__text-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+}

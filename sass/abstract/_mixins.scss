@@ -1,0 +1,68 @@
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin gradient-text {
+  background-image: linear-gradient(to right, $color-primary-light, $color-primary-dark);
+  -webkit-background-clip: text; // it will clip the background image as the text.
+  color: transparent;
+}
+
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// MEDIA QUERY MANAGER
+/*
+  0-600px => Phone
+  600px-900px => Tablet
+  900px-1200px => Tablet Landscape
+  (1200-1800) is where our normal style apply
+  1800px++ => Big Desktop
+*/
+// With this down below we passing an entire block with the @content
+
+/*
+$breakpoint argument choices:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+ORDER: Base > Typography > general layout + grid > page layout > components
+*/
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media only screen and(max-width: 37.5em) {
+      //600px
+      @content;
+    }
+  }
+  @if $breakpoint == tab-port {
+    @media only screen and(max-width: 56.25em) {
+      //900px
+      @content;
+    }
+  }
+  @if $breakpoint == tab-land {
+    @media only screen and(max-width: 75em) {
+      //1200px
+      @content;
+    }
+  }
+  @if $breakpoint == big-desktop {
+    //1800px
+    @media only screen and(min-width: 112.5em) {
+      @content;
+    }
+  }
+  // We add the only screen and/ so if someone tries to print our webpage our media queries wont work, so they are only for screen
+}
